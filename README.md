@@ -44,7 +44,7 @@ ubuntu@bionic:~/LCA2021/edk2[aarch64-flashrom]$ ls -lh Build/ArmVirtQemu-AARCH64
 ### Configure LinuxBoot Kernel and Initramfs
 
 ```
-ubuntu@bionic:~$ export GOPATH=~/go
+ubuntu@bionic:~$ export GOPATH=~/LCA2021/go
 
 ubuntu@bionic:~$ export PATH=${GOPATH}/bin:/opt/go/bin:$PATH
 
@@ -53,15 +53,15 @@ go version go1.13.11 linux/amd64
 
 ubuntu@bionic:~$ go get -u github.com/u-root/u-root
 
-ubuntu@bionic:~$ cd ~/go/src/github.com/u-root/u-root/
+ubuntu@bionic:~$ cd ~/LCA2021/go/src/github.com/u-root/u-root/
 
-ubuntu@bionic:~/go/src/github.com/u-root/u-root[master]$ git fetch lca2021 au.conf-centos8-bls-support
+ubuntu@bionic:~/LCA2021/go/src/github.com/u-root/u-root[master]$ git fetch lca2021 centos8-bls-support
 
-ubuntu@bionic:~/go/src/github.com/u-root/u-root[master]$ git checkout au.conf-centos8-bls-support
+ubuntu@bionic:~/LCA2021/go/src/github.com/u-root/u-root[master]$ git checkout centos8-bls-support
 
-ubuntu@bionic:~/go/src/github.com/u-root/u-root[au.conf-centos8-bls-support]$ go install github.com/u-root/u-root
+ubuntu@bionic:~/LCA2021/go/src/github.com/u-root/u-root[centos8-bls-support]$ go install github.com/u-root/u-root
 
-ubuntu@bionic:~/go/src/github.com/u-root/u-root[au.conf-centos8-bls-support]$ pushd ~/LCA2021
+ubuntu@bionic:~/LCA2021/go/src/github.com/u-root/u-root[centos8-bls-support]$ cd ~/LCA2021
 
 ubuntu@bionic:~/LCA2021[master]$ GOARCH=arm64 u-root -build=bb -o=initramfs.linux_arm64.cpio -uinitcmd=boot core github.com/u-root/u-root/cmds/boot/boot
 
