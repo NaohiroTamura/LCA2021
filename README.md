@@ -39,6 +39,8 @@ ubuntu@bionic:~/LCA2021/edk2[aarch64-flashrom]$ GCC5_AARCH64_PREFIX=aarch64-linu
 ubuntu@bionic:~/LCA2021/edk2[aarch64-flashrom]$ ls -lh Build/ArmVirtQemu-AARCH64/DEBUG_GCC5/FV/*.fd
 -rw-rw-r-- 1 ubuntu ubuntu  32M Dec 21 07:15 Build/ArmVirtQemu-AARCH64/DEBUG_GCC5/FV/QEMU_EFI.fd
 -rw-rw-r-- 1 ubuntu ubuntu 768K Dec 21 07:15 Build/ArmVirtQemu-AARCH64/DEBUG_GCC5/FV/QEMU_VARS.fd
+
+ubuntu@bionic:~/LCA2021/edk2[aarch64-flashrom]$ cd ~
 ```
 
 ### Configure LinuxBoot Kernel and Initramfs
@@ -54,6 +56,8 @@ go version go1.13.11 linux/amd64
 ubuntu@bionic:~$ go get -u github.com/u-root/u-root
 
 ubuntu@bionic:~$ cd ~/LCA2021/go/src/github.com/u-root/u-root/
+
+ubuntu@bionic:~/LCA2021/go/src/github.com/u-root/u-root[master]$ git remote add lca2021 https://github.com/NaohiroTamura/u-root.git
 
 ubuntu@bionic:~/LCA2021/go/src/github.com/u-root/u-root[master]$ git fetch lca2021 centos8-bls-support
 
@@ -90,6 +94,8 @@ ubuntu@bionic:~/LCA2021/linux-5.9.15[master]$ ARCH=arm64 CROSS_COMPILE=/usr/bin/
 ubuntu@bionic:~/LCA2021/linux-5.9.15[master]$ ls -lh ../build-5.9.15/arch/arm64/boot/Image*
 -rw-rw-r-- 1 ubuntu ubuntu  15M Dec 21 09:30 ../build-5.9.15/arch/arm64/boot/Image
 -rw-rw-r-- 1 ubuntu ubuntu 8.2M Dec 21 09:30 ../build-5.9.15/arch/arm64/boot/Image.gz
+
+ubuntu@bionic:~/LCA2021/linux-5.9.15[master]$ cd ~/LCA2021
 ```
 
 ### Inject LinuxBoot into AArch64 64MB Flashrom
