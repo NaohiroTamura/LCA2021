@@ -104,9 +104,7 @@ ubuntu@bionic:~/LCA2021[master]$ dd of=vars-template-pflash.raw if=/dev/zero bs=
 ubuntu@bionic:~/LCA2021[master]$ ls -lh *.raw
 -rw-rw-r-- 1 ubuntu ubuntu 64M Dec 21 14:03 QEMU_EFI-pflash.raw
 -rw-rw-r-- 1 ubuntu ubuntu 64M Dec 21 14:05 vars-template-pflash.raw
-```
 
-```
 ubuntu@bionic:~/LCA2021[master]$ go get -u github.com/linuxboot/fiano/cmds/utk
 
 ubuntu@bionic:~/LCA2021[master]$ utk QEMU_EFI-pflash.raw replace_pe32 Shell build-5.9.15/arch/arm64/boot/Image save QEMU_EFI-pflash-linux.raw 
@@ -121,9 +119,41 @@ ubuntu@bionic:~/LCA2021[master]$ ls -lh QEMU_EFI-pflash-linux.raw
 ubuntu@bionic:~/LCA2021[master]$ /opt/qemu-5.1.0/bin/qemu-system-aarch64 -m 8192 \
 -drive if=pflash,format=raw,readonly,file=QEMU_EFI-pflash-linux.raw \
 -drive if=pflash,format=raw,file=vars-template-pflash.raw \
--device virtio-rng-pci -nographic -serial mon:stdio -k ja \
+-device virtio-rng-pci -nographic -serial mon:stdio \
 -machine virt,accel=tcg -cpu cortex-a72 \
 -hda centos8-aarch64-lvm.qcow2
 ```
 
 ### Debug LinuxBoot AArch64 Kernel using QEMU and GDB on x86_64
+
+```
+ubuntu@bionic:~/LCA2021[master]$ /opt/qemu-5.1.0/bin/qemu-system-aarch64 -s -S -m 8192 \
+-drive if=pflash,format=raw,readonly,file=QEMU_EFI-pflash-linux.raw \
+-drive if=pflash,format=raw,file=vars-template-pflash.raw \
+-device virtio-rng-pci -nographic -serial mon:stdio \
+-machine virt,accel=tcg -cpu cortex-a72 \
+-hda centos8-aarch64-lvm.qcow2
+```
+
+```
+ubuntu@bionic:~/LCA2021[master]$ cat ~/.gdbinit
+set auto-load safe-path /
+
+ubuntu@bionic:~/LCA2021[master]$ /opt/gdb-9.2/bin/aarch64-gnu-linux-gnu-gdb build-5.9.15/vmlinux
+GNU gdb (GDB) 9.2
+...
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from build-5.9.15/vmlinux...
+(gdb) target remote :1234
+Remote debugging using :1234
+0x0000000000000000 in ?? ()
+(gdb) b start_kernel
+Breakpoint 1 at 0xfffffe0010990da4: file /home/ubuntu/LCA2021/linux-5.9.15/init/main.c, line 847.
+(gdb) c
+Continuing.
+
+Breakpoint 1, start_kernel () at /home/ubuntu/LCA2021/linux-5.9.15/init/main.c:847
+847     {
+(gdb)
+```
