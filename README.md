@@ -126,7 +126,7 @@ ubuntu@bionic:~/LCA2021[master]$ /opt/qemu-5.1.0/bin/qemu-system-aarch64 -m 8192
 -drive if=pflash,format=raw,readonly,file=QEMU_EFI-pflash-linux.raw \
 -drive if=pflash,format=raw,file=vars-template-pflash.raw \
 -device virtio-rng-pci -nographic -serial mon:stdio \
--machine virt,accel=tcg -cpu cortex-a72 \
+-machine virt,accel=tcg -cpu cortex-a72 -smp 4 \
 -hda centos8-aarch64-lvm.qcow2
 ```
 
