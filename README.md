@@ -1,8 +1,10 @@
 # LCA2021
 
+[LCA2021 Sysadmin Miniconf Presentations](https://sysadmin.miniconf.org/presentations21.html)
+
 ## Presentation Slide
 
-Getting started with LinuxBoot Firmware on AArch64 Server
+[Getting started with LinuxBoot Firmware on AArch64 Server](LCA2021-SysadminMiniconf-LinuxBootAArch64-NaohiroTamra.pdf)
 
 ## How to boot CentOS 8.2 AArch64 from LinuxBoot Firmware using QEMU
 
